@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/M-bot/static/css/main.a65a788e.css",
-    "main.js": "/M-bot/static/js/main.b56a0783.js",
+    "main.js": "/M-bot/static/js/main.bc50a3f5.js",
     "index.html": "/M-bot/index.html",
     "main.a65a788e.css.map": "/M-bot/static/css/main.a65a788e.css.map",
-    "main.b56a0783.js.map": "/M-bot/static/js/main.b56a0783.js.map"
+    "main.bc50a3f5.js.map": "/M-bot/static/js/main.bc50a3f5.js.map"
   },
   "entrypoints": [
     "static/css/main.a65a788e.css",
-    "static/js/main.b56a0783.js"
+    "static/js/main.bc50a3f5.js"
   ]
 }
