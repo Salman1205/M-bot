@@ -51,7 +51,7 @@ Session(app)
 CORS(app, 
      supports_credentials=True,
      origins="*",
-     allow_headers="*",
+     allow_headers=["Content-Type", "Authorization"],
      methods="*"
 )
 
