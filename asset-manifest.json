@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/M-bot/static/css/main.a65a788e.css",
+    "main.js": "/M-bot/static/js/main.0e02770f.js",
+    "index.html": "/M-bot/index.html",
+    "main.a65a788e.css.map": "/M-bot/static/css/main.a65a788e.css.map",
+    "main.0e02770f.js.map": "/M-bot/static/js/main.0e02770f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a65a788e.css",
+    "static/js/main.0e02770f.js"
+  ]
+}
