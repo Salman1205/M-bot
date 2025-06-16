@@ -28,6 +28,7 @@ const Login = ({ onLogin }) => {
       
       if (response.ok) {
         const userData = await response.json();
+        localStorage.setItem('token', userData.access_token);
         onLogin(userData);
       } else {
         const errorData = await response.json();
@@ -100,7 +101,9 @@ const Navigation = ({ user, setCurrentPage, currentPage, onLogout, isSidebarOpen
       setLoadingHistory(true);
       const userId = user.user_id || user.id;
       const response = await fetch(`${API_URL}/api/sessions/${userId}`, {
-        credentials: 'include'
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
       });
       if (response.ok) {
         const data = await response.json();
@@ -466,7 +469,9 @@ const Chat = ({ user, selectedSessionId, activeSessionId, setActiveSessionId, on
     try {
       const userId = user.user_id || user.id;
       const response = await fetch(`${API_URL}/api/conversation/${userId}`, {
-        credentials: 'include'
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
       });
       if (response.ok) {
         const data = await response.json();
@@ -493,7 +498,9 @@ const Chat = ({ user, selectedSessionId, activeSessionId, setActiveSessionId, on
   const loadSessionMessages = async (sessionId) => {
     try {
       const response = await fetch(`${API_URL}/api/session/${sessionId}/messages`, {
-        credentials: 'include'
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
       });
       if (response.ok) {
         const data = await response.json();
@@ -528,9 +535,10 @@ const Chat = ({ user, selectedSessionId, activeSessionId, setActiveSessionId, on
     try {
       const endResponse = await fetch(`${API_URL}/api/end_session`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ sessionId: currentSessionId })
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
+        }
       });
 
       if (!endResponse.ok) {
@@ -591,9 +599,9 @@ const Chat = ({ user, selectedSessionId, activeSessionId, setActiveSessionId, on
       const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
         body: JSON.stringify({
           message: userMessage,
           userId: user.user_id || user.id,
@@ -896,9 +904,21 @@ const Dashboard = ({ user, refresh }) => {
       
       // Fetch analytics and insights
       const [analyticsRes, moodRes, summariesRes] = await Promise.all([
-        fetch(`${API_URL}/api/analytics/${userId}`, { credentials: 'include' }),
-        fetch(`${API_URL}/api/mood-data/${userId}`, { credentials: 'include' }),
-        fetch(`${API_URL}/api/chat-summaries/${userId}`, { credentials: 'include' })
+        fetch(`${API_URL}/api/analytics/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        }),
+        fetch(`${API_URL}/api/mood-data/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        }),
+        fetch(`${API_URL}/api/chat-summaries/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        })
       ]);
       
       const analytics = await analyticsRes.json();
@@ -1211,9 +1231,9 @@ const Profile = ({ user, onUpdateProfile }) => {
       const response = await fetch(`${API_URL}/api/profile`, {
         method: 'PUT',
         headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
         body: JSON.stringify({
           user_id: user.id,
           ...profile
@@ -1406,7 +1426,9 @@ const Feedback = ({ user }) => {
   const fetchRecentSession = async () => {
     try {
       const response = await fetch(`${API_URL}/api/sessions/${user.id}/recent`, {
-        credentials: 'include'
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
       });
       if (response.ok) {
         const data = await response.json();
@@ -1427,9 +1449,9 @@ const Feedback = ({ user }) => {
       const response = await fetch(`${API_URL}/api/feedback`, {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
         body: JSON.stringify({
           user_id: user.id,
           session_id: recentSession?.session_id,
@@ -1577,7 +1599,9 @@ const App = () => {
   const checkAuthStatus = async () => {
     try {
       const response = await fetch(`${API_URL}/api/user`, {
-        credentials: 'include'
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
       });
       if (response.ok) {
         const userData = await response.json();

@@ -14,6 +14,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 import numpy as np
 from flask_session import Session
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 # Import models
 from models import db, User, ChatMessage, TrainingData, UserProfile, UserPreferences, ChatSession, Feedback, ChatSummary
@@ -46,6 +47,9 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_FILE_DIR'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flask_session')
 Session(app)
+
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'super-secret-key')
+jwt = JWTManager(app)
 
 # Configure CORS with credentials
 CORS(app, 
@@ -575,15 +579,12 @@ def generate_dashboard_insights(user_id):
 # API Routes
 
 @app.route('/api/user')
+@jwt_required()
 def get_current_user():
-    """Get current logged-in user"""
-    if 'user_id' not in session:
-        return jsonify({'error': 'Not authenticated'}), 401
-    
-    user_data = get_user_data(session['user_id'])
+    user_id = get_jwt_identity()
+    user_data = get_user_data(user_id)
     if not user_data:
         return jsonify({'error': 'User not found'}), 404
-    
     return jsonify(user_data)
 
 @app.route('/api/login', methods=['POST'])
@@ -592,65 +593,40 @@ def login():
         data = request.get_json()
         email = data.get('email')
         password = data.get('password')
-        
         if not email or not password:
             return jsonify({'error': 'Email and password are required'}), 400
+
+        user = User.query.filter_by(email=email).first() if USE_DATABASE else None
+        if not user:
+            # Create new user for demo
+            user = User(
+                user_id=str(uuid.uuid4()),
+                email=email,
+                password_hash='',  # In production, use proper password hashing
+                auth_method='email',
+                is_verified=True
+            )
+            db.session.add(user)
             
-        if USE_DATABASE:
-            user = User.query.filter_by(email=email).first()
-            if not user:
-                # Create new user for demo
-                user = User(
-                    user_id=str(uuid.uuid4()),
-                    email=email,
-                    password_hash='',  # In production, use proper password hashing
-                    auth_method='email',
-                    is_verified=True
-                )
-                db.session.add(user)
-                
-                profile = UserProfile(
-                    profile_id=generate_uuid(),
-                    user_id=user.user_id,
-                    screen_name=email.split('@')[0]
-                )
-                db.session.add(profile)
-                
-                preferences = UserPreferences(
-                    preference_id=generate_uuid(),
-                    user_id=user.user_id,
-                    preferred_response_length='medium'
-                )
-                db.session.add(preferences)
-                
-                db.session.commit()
-        else:
-            # In-memory storage fallback
-            user_id = str(uuid.uuid4())
-            if email not in users:
-                users[user_id] = {
-                    'user_id': user_id,
-                    'email': email,
-                    'name': email.split('@')[0],
-                    'screen_name': email.split('@')[0],
-                    'created_at': datetime.utcnow(),
-                    'last_login': datetime.utcnow(),
-                    'is_verified': True,
-                    'auth_method': 'email'
-                }
-            else:
-                users[user_id]['last_login'] = datetime.utcnow()
-        
-        # Set session
-        session['user_id'] = user.user_id if USE_DATABASE else user_id
-        session['user_email'] = email
-        
-        return jsonify({
-            'id': user.user_id if USE_DATABASE else user_id,
-            'email': email,
-            'name': email.split('@')[0]
-        })
-        
+            profile = UserProfile(
+                profile_id=generate_uuid(),
+                user_id=user.user_id,
+                screen_name=email.split('@')[0]
+            )
+            db.session.add(profile)
+            
+            preferences = UserPreferences(
+                preference_id=generate_uuid(),
+                user_id=user.user_id,
+                preferred_response_length='medium'
+            )
+            db.session.add(preferences)
+            
+            db.session.commit()
+
+        user_id = user.user_id if USE_DATABASE else email  # or however you identify users
+        access_token = create_access_token(identity=user_id)
+        return jsonify(access_token=access_token, user_id=user_id)
     except Exception as e:
         logger.error(f"Login error: {str(e)}")
         return jsonify({'error': 'An error occurred during login'}), 500
@@ -741,11 +717,9 @@ def get_conversation(user_id):
         }), 500
 
 @app.route("/api/chat", methods=["POST"])
+@jwt_required()
 def api_chat():
-    if 'user_id' not in session:
-        return jsonify({"error": "Not authenticated"}), 401
-    
-    user_id = session['user_id']
+    user_id = get_jwt_identity()
     data = request.get_json() if request.is_json else request.form
     message_text = data.get("message")
     
