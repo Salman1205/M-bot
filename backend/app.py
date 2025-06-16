@@ -50,9 +50,9 @@ Session(app)
 # Configure CORS with credentials
 CORS(app, 
      supports_credentials=True,
-     origins="*",
+     origins=["https://salman1205.github.io"],
      allow_headers=["Content-Type", "Authorization"],
-     methods="*"
+     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 )
 
 # Configure database
