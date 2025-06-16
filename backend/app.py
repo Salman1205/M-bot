@@ -596,35 +596,46 @@ def login():
         if not email or not password:
             return jsonify({'error': 'Email and password are required'}), 400
 
-        user = User.query.filter_by(email=email).first() if USE_DATABASE else None
-        if not user:
-            # Create new user for demo
-            user = User(
-                user_id=str(uuid.uuid4()),
-                email=email,
-                password_hash='',  # In production, use proper password hashing
-                auth_method='email',
-                is_verified=True
-            )
-            db.session.add(user)
-            
-            profile = UserProfile(
-                profile_id=generate_uuid(),
-                user_id=user.user_id,
-                screen_name=email.split('@')[0]
-            )
-            db.session.add(profile)
-            
-            preferences = UserPreferences(
-                preference_id=generate_uuid(),
-                user_id=user.user_id,
-                preferred_response_length='medium'
-            )
-            db.session.add(preferences)
-            
-            db.session.commit()
+        if USE_DATABASE:
+            user = User.query.filter_by(email=email).first()
+            if not user:
+                # Create new user for demo
+                user = User(
+                    user_id=str(uuid.uuid4()),
+                    email=email,
+                    password_hash='',  # In production, use proper password hashing
+                    auth_method='email',
+                    is_verified=True
+                )
+                db.session.add(user)
+                profile = UserProfile(
+                    profile_id=generate_uuid(),
+                    user_id=user.user_id,
+                    screen_name=email.split('@')[0]
+                )
+                db.session.add(profile)
+                preferences = UserPreferences(
+                    preference_id=generate_uuid(),
+                    user_id=user.user_id,
+                    preferred_response_length='medium'
+                )
+                db.session.add(preferences)
+                db.session.commit()
+            user_id = user.user_id
+        else:
+            # In-memory storage fallback
+            user_id = str(uuid.uuid4())
+            users[user_id] = {
+                'user_id': user_id,
+                'email': email,
+                'name': email.split('@')[0],
+                'screen_name': email.split('@')[0],
+                'created_at': datetime.utcnow(),
+                'last_login': datetime.utcnow(),
+                'is_verified': True,
+                'auth_method': 'email'
+            }
 
-        user_id = user.user_id if USE_DATABASE else email  # or however you identify users
         access_token = create_access_token(identity=user_id)
         return jsonify(access_token=access_token, user_id=user_id)
     except Exception as e:
