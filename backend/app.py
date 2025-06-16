@@ -50,15 +50,9 @@ Session(app)
 # Configure CORS with credentials
 CORS(app, 
      supports_credentials=True,
-     origins=[
-         "http://localhost:3000",
-         "http://127.0.0.1:3000",
-         os.getenv('FRONTEND_URL', '')  # Add production frontend URL
-     ],
-     methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-     allow_headers=['Content-Type', 'Authorization'],
-     expose_headers=['Content-Type', 'Authorization'],
-     max_age=600  # Cache preflight requests for 10 minutes
+     origins="*",
+     allow_headers="*",
+     methods="*"
 )
 
 # Configure database

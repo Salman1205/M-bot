@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-ro
 import './App.css';
 import { FiMenu, FiChevronLeft, FiMessageSquare, FiClock, FiUser, FiPlus, FiX, FiArrowRight } from 'react-icons/fi';
 
-const LOGO_SRC = '/newlogo.jpg';
+const LOGO_SRC = process.env.PUBLIC_URL + '/newlogo.jpg';
+const API_URL = process.env.REACT_APP_API_URL;
 
 // Login Component with OAuth
 const Login = ({ onLogin }) => {
@@ -16,7 +17,7 @@ const Login = ({ onLogin }) => {
     setError('');
     
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch(`${API_URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +99,7 @@ const Navigation = ({ user, setCurrentPage, currentPage, onLogout, isSidebarOpen
     try {
       setLoadingHistory(true);
       const userId = user.user_id || user.id;
-      const response = await fetch(`http://localhost:5000/api/sessions/${userId}`, {
+      const response = await fetch(`${API_URL}/api/sessions/${userId}`, {
         credentials: 'include'
       });
       if (response.ok) {
@@ -464,7 +465,7 @@ const Chat = ({ user, selectedSessionId, activeSessionId, setActiveSessionId, on
   const loadActiveSession = async () => {
     try {
       const userId = user.user_id || user.id;
-      const response = await fetch(`http://localhost:5000/api/conversation/${userId}`, {
+      const response = await fetch(`${API_URL}/api/conversation/${userId}`, {
         credentials: 'include'
       });
       if (response.ok) {
@@ -491,7 +492,7 @@ const Chat = ({ user, selectedSessionId, activeSessionId, setActiveSessionId, on
 
   const loadSessionMessages = async (sessionId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/session/${sessionId}/messages`, {
+      const response = await fetch(`${API_URL}/api/session/${sessionId}/messages`, {
         credentials: 'include'
       });
       if (response.ok) {
@@ -525,7 +526,7 @@ const Chat = ({ user, selectedSessionId, activeSessionId, setActiveSessionId, on
     }
 
     try {
-      const endResponse = await fetch('http://localhost:5000/api/end_session', {
+      const endResponse = await fetch(`${API_URL}/api/end_session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -587,7 +588,7 @@ const Chat = ({ user, selectedSessionId, activeSessionId, setActiveSessionId, on
     setIsTyping(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/chat', {
+      const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -895,9 +896,9 @@ const Dashboard = ({ user, refresh }) => {
       
       // Fetch analytics and insights
       const [analyticsRes, moodRes, summariesRes] = await Promise.all([
-        fetch(`http://localhost:5000/api/analytics/${userId}`, { credentials: 'include' }),
-        fetch(`http://localhost:5000/api/mood-data/${userId}`, { credentials: 'include' }),
-        fetch(`http://localhost:5000/api/chat-summaries/${userId}`, { credentials: 'include' })
+        fetch(`${API_URL}/api/analytics/${userId}`, { credentials: 'include' }),
+        fetch(`${API_URL}/api/mood-data/${userId}`, { credentials: 'include' }),
+        fetch(`${API_URL}/api/chat-summaries/${userId}`, { credentials: 'include' })
       ]);
       
       const analytics = await analyticsRes.json();
@@ -1207,7 +1208,7 @@ const Profile = ({ user, onUpdateProfile }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch(`${API_URL}/api/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -1404,7 +1405,7 @@ const Feedback = ({ user }) => {
 
   const fetchRecentSession = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/sessions/${user.id}/recent`, {
+      const response = await fetch(`${API_URL}/api/sessions/${user.id}/recent`, {
         credentials: 'include'
       });
       if (response.ok) {
@@ -1423,7 +1424,7 @@ const Feedback = ({ user }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/feedback', {
+      const response = await fetch(`${API_URL}/api/feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1575,7 +1576,7 @@ const App = () => {
 
   const checkAuthStatus = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/user', {
+      const response = await fetch(`${API_URL}/api/user`, {
         credentials: 'include'
       });
       if (response.ok) {
@@ -1595,7 +1596,7 @@ const App = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:5000/logout', {
+      await fetch(`${API_URL}/logout`, {
         method: 'POST',
         credentials: 'include'
       });
