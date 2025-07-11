@@ -1,0 +1,29 @@
+{
+  "short_name": "M",
+  "name": "M - Identity Mentor",
+  "description": "Your personal AI companion for identity exploration and emotional well-being",
+  "icons": [
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "newlogo.jpg",
+      "type": "image/jpeg",
+      "sizes": "192x192",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#8EE6A3",
+  "background_color": "#0F0A0F",
+  "categories": ["health", "lifestyle", "social"],
+  "lang": "en",
+  "scope": "/",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "prefer_related_applications": false
+}

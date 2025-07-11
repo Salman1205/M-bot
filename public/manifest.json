@@ -1,0 +1,130 @@
+{
+  "short_name": "M",
+  "name": "M - Identity Mentor",
+  "description": "Your personal AI companion for identity exploration and emotional well-being. A safe, supportive space for personal growth anytime, anywhere.",
+  "icons": [
+    {
+      "src": "newlogo.jpg",
+      "type": "image/jpeg",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "newlogo.jpg",
+      "type": "image/jpeg",
+      "sizes": "256x256",
+      "purpose": "any"
+    },
+    {
+      "src": "newlogo.jpg",
+      "type": "image/jpeg",
+      "sizes": "144x144",
+      "purpose": "any"
+    },
+    {
+      "src": "newlogo.jpg",
+      "type": "image/jpeg",
+      "sizes": "96x96",
+      "purpose": "any"
+    },
+    {
+      "src": "newlogo.jpg",
+      "type": "image/jpeg",
+      "sizes": "72x72",
+      "purpose": "any"
+    },
+    {
+      "src": "newlogo.jpg",
+      "type": "image/jpeg",
+      "sizes": "48x48",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#8EE6A3",
+  "background_color": "#0F0A0F",
+  "categories": ["health", "lifestyle", "social", "productivity", "wellness"],
+  "lang": "en",
+  "scope": "/",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Start New Chat",
+      "short_name": "New Chat",
+      "description": "Begin a new conversation with M",
+      "url": "/?action=new-chat",
+      "icons": [
+        {
+          "src": "newlogo.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "short_name": "Profile",
+      "description": "View and edit your profile",
+      "url": "/?action=profile",
+      "icons": [
+        {
+          "src": "newlogo.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your wellness dashboard",
+      "url": "/?action=dashboard",
+      "icons": [
+        {
+          "src": "newlogo.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Feedback",
+      "short_name": "Feedback",
+      "description": "Share your feedback",
+      "url": "/?action=feedback",
+      "icons": [
+        {
+          "src": "newlogo.jpg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "protocol_handlers": [],
+  "file_handlers": [],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "iarc_rating_id": "",
+  "related_applications": [],
+  "screenshots": [
+    {
+      "src": "newlogo.jpg",
+      "type": "image/jpeg",
+      "sizes": "540x720",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "newlogo.jpg",
+      "type": "image/jpeg", 
+      "sizes": "720x540",
+      "form_factor": "wide"
+    }
+  ]
+}

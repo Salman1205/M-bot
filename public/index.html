@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/newlogo.jpg" />
+    
+    <!-- 📱 Enhanced Mobile Viewport & Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="M - Identity Mentor" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    
+    <!-- 📱 PWA & App Store Optimization -->
+    <meta name="theme-color" content="#200125" />
+    <meta name="msapplication-TileColor" content="#200125" />
+    <meta name="msapplication-navbutton-color" content="#200125" />
+    
+    <!-- 📱 iOS Specific Optimizations -->
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- 📱 Android Specific -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#200125" />
+    
+    <!-- Enhanced App Description -->
+    <meta
+      name="description"
+      content="M - Your Identity Mentor. A safe, supportive mobile app for personal growth, identity exploration, and emotional well-being. Chat with your AI companion anytime, anywhere."
+    />
+    
+    <!-- 📱 Social Media & App Store Meta -->
+    <meta property="og:title" content="M - Identity Mentor" />
+    <meta property="og:description" content="Your personal AI companion for identity exploration and emotional well-being" />
+    <meta property="og:image" content="%PUBLIC_URL%/newlogo.jpg" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="M - Identity Mentor" />
+    <meta name="twitter:description" content="Your personal AI companion for identity exploration and emotional well-being" />
+    
+    <!-- 📱 App Icons & Touch Icons -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/newlogo.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/newlogo.jpg" />
+    <link rel="apple-touch-icon" sizes="152x152" href="%PUBLIC_URL%/newlogo.jpg" />
+    <link rel="apple-touch-icon" sizes="144x144" href="%PUBLIC_URL%/newlogo.jpg" />
+    <link rel="apple-touch-icon" sizes="120x120" href="%PUBLIC_URL%/newlogo.jpg" />
+    <link rel="apple-touch-icon" sizes="114x114" href="%PUBLIC_URL%/newlogo.jpg" />
+    <link rel="apple-touch-icon" sizes="76x76" href="%PUBLIC_URL%/newlogo.jpg" />
+    <link rel="apple-touch-icon" sizes="72x72" href="%PUBLIC_URL%/newlogo.jpg" />
+    <link rel="apple-touch-icon" sizes="60x60" href="%PUBLIC_URL%/newlogo.jpg" />
+    <link rel="apple-touch-icon" sizes="57x57" href="%PUBLIC_URL%/newlogo.jpg" />
+    
+    <!-- 📱 PWA Manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- 📱 Performance & Loading Optimizations -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- 📱 Enhanced Font Loading for Mobile -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600&family=IBM+Plex+Sans:wght@500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- 📱 Mobile App Title -->
+    <title>M - Identity Mentor</title>
+    
+    <!-- 📱 Prevent FOUC (Flash of Unstyled Content) -->
+    <style>
+      body { 
+        visibility: hidden; 
+        opacity: 0; 
+        transition: opacity 0.3s ease-in-out;
+      }
+      body.loaded { 
+        visibility: visible; 
+        opacity: 1; 
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    
+    <!-- 📱 Mobile App Loading Script -->
+    <script>
+      // Prevent FOUC and enhance mobile loading
+      document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('loaded');
+      });
+      
+      // Mobile-specific optimizations
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+      
+      // Prevent iOS Safari zoom on input focus
+      document.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+      });
+      
+      // Enhanced mobile app experience
+      if (window.navigator && window.navigator.standalone) {
+        // Running as PWA
+        document.body.classList.add('pwa-mode');
+      }
+    </script>
+  </body>
+</html>
