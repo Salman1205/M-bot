@@ -13,7 +13,7 @@
 
 See M-bot in action with this complete walkthrough:
 
-![M-bot Demo](M-bot%20-%20Made%20with%20Clipchamp.gif)
+![M-bot Demo](M-bot.gif)
 
 *Interactive demo showing the complete user workflow from registration to AI conversation*
 
