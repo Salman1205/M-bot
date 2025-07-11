@@ -96,12 +96,25 @@ M-bot/
    pip install -r reqs.txt
    ```
 
-4. Initialize database:
+4. **Configure Environment Variables:**
+   ```bash
+   # Create .env file
+   touch .env
+   
+   # Add your API keys to .env file:
+   echo "GROQ_API_KEY=your_actual_groq_api_key" >> .env
+   echo "SECRET_KEY=$(python -c 'import secrets; print(secrets.token_hex(32))')" >> .env
+   echo "JWT_SECRET_KEY=$(python -c 'import secrets; print(secrets.token_hex(32))')" >> .env
+   echo "FLASK_ENV=development" >> .env
+   echo "FLASK_APP=app.py" >> .env
+   ```
+
+5. Initialize database:
    ```bash
    python models.py
    ```
 
-5. Start Flask server:
+6. Start Flask server:
    ```bash
    python app.py
    ```
