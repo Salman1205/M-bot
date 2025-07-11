@@ -11,11 +11,11 @@
 
 ## Demo Video
 
-**[🎥 Watch Demo Video](https://github.com/Salman1205/M-bot/raw/master/M-bot%20-%20Made%20with%20Clipchamp.mp4)**
+See M-bot in action with this complete walkthrough:
 
-[![M-bot Demo Preview](public/newlogo.jpg)](https://github.com/Salman1205/M-bot/raw/master/M-bot%20-%20Made%20with%20Clipchamp.mp4)
+![M-bot Demo](M-bot%20-%20Made%20with%20Clipchamp.gif)
 
-*Click the logo above or the link to watch the complete user workflow demonstration*
+*Interactive demo showing the complete user workflow from registration to AI conversation*
 
 ## Overview
 
