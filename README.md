@@ -1,9 +1,9 @@
-# M-bot - Identity Mentor
+# M-bot - AI Therapy Bot
 
 <div align="center">
   <img src="public/newlogo.jpg" alt="M-bot Logo" width="150" height="150">
   
-  **Personal AI companion for identity exploration and emotional well-being**
+  **AI-powered therapy bot for mental health support and emotional well-being**
   
   [![GitHub](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/Salman1205/M-bot)
   [![Live Demo](https://img.shields.io/badge/Live-Demo-green)](https://salman1205.github.io/M-bot/)
@@ -11,32 +11,32 @@
 
 ## Demo Video
 
-See M-bot in action with this complete walkthrough:
+See M-bot therapy sessions in action with this complete walkthrough:
 
 ![M-bot Demo](M-bot.gif)
 
-*Interactive demo showing the complete user workflow from registration to AI conversation*
+*Demo showing the workflow from patient registration to AI therapeutic conversation*
 
 ## Overview
 
-M-bot is an AI-powered identity mentor application designed to provide a supportive environment for personal growth and emotional well-being. The application combines advanced natural language processing with an intuitive user interface to offer personalized guidance for identity exploration.
+M-bot is an AI-powered therapy bot designed to provide accessible mental health support and emotional guidance. The application combines advanced natural language processing with an intuitive user interface to offer personalized therapeutic conversations and mental wellness support.
 
 ## Key Features
 
-- **AI-Powered Conversations**: Advanced NLP for meaningful, context-aware interactions
-- **User Profile Management**: Personalized experience with comprehensive profile system
-- **Real-time Chat Interface**: Instant responses with conversation history
-- **Progressive Web App**: Cross-platform compatibility with offline capabilities
-- **Secure Session Management**: Safe and confidential user data handling
-- **Responsive Design**: Optimized for desktop and mobile devices
+- **AI-Powered Therapy Sessions**: Advanced NLP for empathetic, therapeutic conversations
+- **Patient Profile Management**: Personalized mental health tracking and session history
+- **Real-time Chat Interface**: Instant therapeutic support with conversation continuity
+- **Progressive Web App**: 24/7 accessibility across all devices with offline support
+- **Secure & Confidential**: HIPAA-compliant data handling for patient privacy
+- **Responsive Design**: Optimized user experience for therapy sessions on any device
 
 ## Technology Stack
 
 ### Backend
 - **Python 3.8+** with Flask framework
 - **SQLite** database with SQLAlchemy ORM
-- **Custom NLP Module** for AI response generation
-- **Flask-Session** for secure session management
+- **Custom NLP Module** for therapeutic AI responses
+- **Flask-Session** for secure patient session management
 
 ### Frontend
 - **React.js** for dynamic user interface
@@ -145,26 +145,26 @@ For production deployment, consider platforms like Render, Heroku, or AWS:
 
 ## Usage
 
-1. **Registration**: Create a new user account
-2. **Profile Setup**: Configure personal preferences and goals
-3. **Chat Interface**: Begin conversations with the AI mentor
-4. **Session Management**: Access conversation history and progress tracking
+1. **Patient Registration**: Create a secure patient account
+2. **Profile Setup**: Configure therapeutic preferences and mental health goals
+3. **Therapy Sessions**: Begin therapeutic conversations with the AI bot
+4. **Session Management**: Access therapy history and mental wellness progress tracking
 
 ## API Documentation
 
 ### Authentication Endpoints
-- `POST /register` - User registration
-- `POST /login` - User authentication
+- `POST /register` - Patient registration
+- `POST /login` - Patient authentication
 - `POST /logout` - Session termination
 
-### Chat Endpoints
-- `POST /chat` - Send message to AI mentor
-- `GET /history` - Retrieve conversation history
-- `DELETE /history` - Clear conversation data
+### Therapy Endpoints
+- `POST /chat` - Send message to therapy bot
+- `GET /history` - Retrieve therapy session history
+- `DELETE /history` - Clear therapy conversation data
 
-### Profile Endpoints
-- `GET /profile` - Retrieve user profile
-- `PUT /profile` - Update profile information
+### Patient Profile Endpoints
+- `GET /profile` - Retrieve patient profile
+- `PUT /profile` - Update patient information and preferences
 
 ## Development
 
@@ -183,11 +183,11 @@ For production deployment, consider platforms like Render, Heroku, or AWS:
 
 ## Security Considerations
 
-- User data encryption and secure storage
-- Input validation and sanitization
+- Patient data encryption and HIPAA-compliant secure storage
+- Input validation and sanitization for therapeutic content
 - CSRF protection implementation
-- Secure session management
-- Regular security audits and updates
+- Secure patient session management
+- Regular security audits and healthcare compliance updates
 
 ## License
 
@@ -201,4 +201,4 @@ For technical support, bug reports, or feature requests:
 
 ---
 
-**M-bot Identity Mentor** - Professional AI-powered personal development platform 
+**M-bot AI Therapy Bot** - Professional AI-powered mental health support platform 
